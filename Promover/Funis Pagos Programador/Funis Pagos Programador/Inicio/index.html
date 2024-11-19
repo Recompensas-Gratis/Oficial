@@ -1,0 +1,226 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link data-optimized="1" rel="stylesheet" href="css/AvfG3JP5NHz4.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link data-optimized="1" href="css/TVwRKqcDl6JP.css" rel="stylesheet">
+    <link data-optimized="1" href="css/ZWcPFmL2CcoG.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/RrW5toxfw6fZ.css">
+    <link rel="stylesheet" href="css/nEnBSReujNZD.css">
+    <link rel="shortcut icon" href="images/xcA9sL8KZzyz.png">
+    </head><body style="background-color: #096b20;"><audio id="meuAudio"><source src="media/e0tiS2xgUCAS.mp3" type="audio/mp3"></audio>
+    <title>:: Códigos Lucrativos ::</title>
+
+
+
+
+
+<div id="p1" style="background-color: #121212; padding: 40px 0 20px 0; position: relative;">
+        <img style="width: 140px; padding-bottom:45px; margin: 0 auto; display: flex;" src="images/Nd09E2tPjqqk.png">
+        <div class="corteLayout" style="background-color: #121212;">
+
+
+
+            <h1 style="font-family:'RecoletaBold'; font-size: 30px; text-align: center; margin: 25px 0 20px 0; color: #FFFFFF">Seja bem-vindo!</h1>
+             <p style="font-size: 15px; text-align: center; padding: 0 7px 0 7px; font-family:'Radian'; color: #FFFFFF">Coloque abaixo o seu CPF<br>para criar sua conta no aplicativo!</p>
+
+            <br> 
+
+             
+        </div>
+    </div>
+           
+        </div>
+        
+    </div>
+<script src="script.js"></script>
+
+<style type="text/css">
+    
+
+
+.input.emailUsuario::placeholder {
+    color: #FFFFFF;
+    opacity: 1; /* Isso garante que a cor seja aplicada com a opacidade completa */
+}
+#cpfUsuario {
+    text-transform: uppercase;
+    background-color: transparent;
+    border: 2px solid;
+    color: #FFFFFF;
+}
+
+#cpfUsuario::placeholder {
+    color: #FFFFFF;
+}
+
+
+/* Estilos CSS aqui... */
+
+.loader {
+    border: 6px solid rgba(0, 0, 0, 0.1);
+    border-top: 6px solid #229a3d; /* Cor do loading */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.center-image {
+    display: flex;
+    justify-content: center;
+}
+
+.center-image img {
+    width: 140px;
+}
+
+.center-content {
+    display: flex;
+    justify-content: center;
+
+}
+
+.loader {
+    /* Estilos do seu loader */
+}
+
+
+
+
+    
+</style>
+
+<div style="background-color: transparent; width: 100%; margin-top: 125px;">
+    <div class="coolinput" style="margin-top: -10px;">
+        <div style="position: relative;">
+            <label style="z-index: 1; background-color: #096b20; color: #FFFFFF;" for="cpfUsuario" id="textoEmail" class="text">CPF</label>
+            <input style="text-transform: uppercase; background-color: transparent; border: 2px solid; color: #FFFFFF; 
+                          ::placeholder { color: #FFFFFF; }" 
+                   type="text" placeholder="000.000.000-00" name="cpfUsuario" id="cpfUsuario" 
+                   class="input cpfUsuario" autocomplete="off" required="" maxlength="14" 
+                   oninput="formatCPF(this)" onblur="validarCPFOnBlur(this)"><p></p>
+            <div id="cpfErro" style="color: red; display: none;">CPF incorreto!</div>
+            <div id="cpfCorreto" style="color: #FFFFFF; display: none;">CPF correto!</div>
+        </div>
+       <button onclick="startAnimation()" 
+        style="display: block; background-color: #121212; color: #ffffff; 
+               text-align: center; padding: 15px; border-radius: 23px; 
+               position: unset; margin-top: 30px; width: 100%;" 
+        class="continuarAtivo">Verificar Dados</button>
+
+    </div>
+</div>
+
+
+
+
+
+<script>
+function validarCPF(cpf) {
+    cpf = cpf.replace(/[^\d]+/g,'');
+    if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) {
+        return false;
+    }
+    let soma = 0, resto;
+    for (let i = 1; i <= 9; i++) soma += parseInt(cpf.substring(i-1, i)) * (11 - i);
+    resto = (soma * 10) % 11;
+    if ((resto === 10) || (resto === 11)) resto = 0;
+    if (resto !== parseInt(cpf.substring(9, 10))) return false;
+    soma = 0;
+    for (let i = 1; i <= 10; i++) soma += parseInt(cpf.substring(i-1, i)) * (12 - i);
+    resto = (soma * 10) % 11;
+    if ((resto === 10) || (resto === 11)) resto = 0;
+    if (resto !== parseInt(cpf.substring(10, 11))) return false;
+    return true;
+}
+
+function formatCPF(input) {
+    let value = input.value.replace(/\D/g, '');
+    value = value.replace(/^(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3');
+    value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, '$1.$2.$3-$4');
+    input.value = value;
+}
+
+function validarCPFOnBlur(input) {
+    const cpfErro = document.getElementById('cpfErro');
+    const cpfCorreto = document.getElementById('cpfCorreto');
+
+    if (validarCPF(input.value)) {
+        cpfErro.style.display = 'none';
+        cpfCorreto.style.display = 'block';
+    } else {
+        cpfErro.style.display = 'block';
+        cpfCorreto.style.display = 'none';
+    }
+}
+
+function startAnimation() {
+    const cpfInput = document.getElementById('cpfUsuario');
+    const cpfErro = document.getElementById('cpfErro');
+    
+    if (validarCPF(cpfInput.value)) {
+        cpfErro.style.display = 'none';
+        openPopup();
+    } else {
+        cpfErro.style.display = 'block';
+        cpfInput.style.borderColor = 'red';
+    }
+}
+
+function openPopup() {
+    document.getElementById('popup').style.display = 'block';
+    document
+    document.getElementById('popup').classList.add('show-popup'); // Adiciona a classe para personalizar o pop-up
+}
+
+function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+    document.getElementById('popup').classList.remove('show-popup'); // Remove a classe do pop-up
+}
+</script>
+
+<p> </p>
+
+<div id="red-screen" style="background-color: #121212;">
+    <div class="loadpage">
+        <div class="center-image">
+    <img src="images/Nd09E2tPjqqk.png">
+</div>
+
+        <div><p> </p>
+            <div class="center-content">
+    <div class="loader" style="display: inline-block;"></div>
+    <p> </p>
+</div><p> </p>
+
+                       <span style="display: inline-block; vertical-align: middle; color: #FFFFFF;">Validando seus Dados...</span>
+<p> </p>
+        </div><p> </p>
+    </div>
+</div>
+<!-- Popup HTML -->
+<div id="popup" style="display: none;">
+    <div class="popup-content">
+        <p>CPF válido! Bem-vindo ao aplicativo.</p>
+        <button onclick="closePopup()">Continuar</button>
+    </div>
+</div>
+
+<div id="red-screen" style="display: none; background-color: red; width: 100px; height: 100px;"></div>
+
+
+    <script src="js/CAJwF0Jwl7LY.js"></script>
+    <script src="js/TfRm5NTcdWbr.js"></script>
+    <script src="js/6iN8OnLkr77u.js"></script>
+
+
+
+</body></html>

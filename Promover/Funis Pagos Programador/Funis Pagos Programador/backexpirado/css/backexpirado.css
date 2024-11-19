@@ -1,0 +1,113 @@
+/* Estilo do corpo */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #FCF5EB;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Estilo do header */
+.header {
+    background-color: #FCF5EB;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Logo do header */
+.logo {
+    width: 150px;
+}
+
+/* Estilo da área principal */
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    top: 0;
+    z-index: 2;
+}
+
+/* Estilo da caixa centralizada */
+.box {
+    background: #1d1d1d; /* Cor de fundo do box */
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto; /* Centraliza o box */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o conteúdo dentro do box */
+    color: #FFFFFF;
+}
+
+/* Estilo da mensagem de alerta */
+.alert {
+    background-color: #e63946;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Estilo do texto informativo */
+.info {
+    font-size: 18px;
+    color: #a9f586;
+    margin-bottom: 20px;
+    font-weight: bold;
+    line-height: 1.5; /* Espaçamento entre linhas */
+}
+
+/* Estilo do texto detalhado */
+.details {
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: left;
+    line-height: 1.5; /* Espaçamento entre linhas */
+}
+
+/* Estilo do botão de chamada para ação */
+.cta-button {
+    padding: 15px 20px;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #ffffff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    width: 90%; /* Quase a largura do box */
+    max-width: 350px;
+}
+
+.cta-button:hover {
+    background-color: #45A049;
+}
+
+/* Estilo do footer */
+.footer {
+    background-color: #1d1d1d;
+    color: white;
+    text-align: center;
+    padding: 20px 10px;
+}
+
+/* Logo do footer */
+.footer-logo {
+    max-width: 150px;
+    margin-bottom: 10px;
+}

